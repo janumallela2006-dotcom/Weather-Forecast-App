@@ -22,6 +22,12 @@ The app provides important weather details such as **temperature, humidity, wind
 * Responsive and modern user interface
 * Input validation and error handling
 
+# Output
+
 
 <img width="1917" height="912" alt="image" src="https://github.com/user-attachments/assets/2a2c17e8-c153-4441-a3bb-80e04ab55c48" />
+
+<img width="1917" height="907" alt="image" src="https://github.com/user-attachments/assets/002c892d-8368-4a7c-8f74-9e1fdef157f3" />
+
+<img width="1917" height="907" alt="image" src="https://github.com/user-attachments/assets/1e61c983-05b3-4d71-843f-96c3ea8ef1ef" />
 
