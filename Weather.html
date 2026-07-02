@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Forecast App</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:380px;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 10px 20px rgba(0,0,0,.3);
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:15px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:8px;
+    background:#0077ff;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#005ad1;
+}
+
+.weather{
+    margin-top:20px;
+    text-align:left;
+}
+
+.weather p{
+    margin:8px 0;
+    font-size:17px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🌤 Weather Forecast</h2>
+
+<input type="text" id="city" placeholder="Enter City Name">
+
+<button onclick="getWeather()">Search</button>
+
+<div class="weather" id="result"></div>
+
+</div>
+
+<script>
+
+async function getWeather(){
+
+const city=document.getElementById("city").value.trim();
+
+if(city===""){
+alert("Enter city name");
+return;
+}
+
+try{
+
+const geo=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`);
+
+const geoData=await geo.json();
+
+if(!geoData.results){
+document.getElementById("result").innerHTML="<h3>City Not Found</h3>";
+return;
+}
+
+const lat=geoData.results[0].latitude;
+const lon=geoData.results[0].longitude;
+const place=geoData.results[0].name;
+const country=geoData.results[0].country;
+
+const weather=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m`);
+
+const weatherData=await weather.json();
+
+document.getElementById("result").innerHTML=`
+
+<h3>${place}, ${country}</h3>
+
+<p>🌡 Temperature : ${weatherData.current.temperature_2m} °C</p>
+
+<p>💧 Humidity : ${weatherData.current.relative_humidity_2m}%</p>
+
+<p>🌬 Wind Speed : ${weatherData.current.wind_speed_10m} km/h</p>
+
+`;
+
+}
+
+catch(error){
+
+document.getElementById("result").innerHTML="<h3>Error Loading Data</h3>";
+
+console.log(error);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
