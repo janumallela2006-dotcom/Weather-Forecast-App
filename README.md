@@ -21,3 +21,7 @@ The app provides important weather details such as **temperature, humidity, wind
 * Display city and country information
 * Responsive and modern user interface
 * Input validation and error handling
+
+
+<img width="1917" height="912" alt="image" src="https://github.com/user-attachments/assets/2a2c17e8-c153-4441-a3bb-80e04ab55c48" />
+
